@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Benedict Nii Odartey Mensah — Full-Stack Developer{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>Benedict Nii Odartey Mensah</h1>
+    <p class="hero-subtitle">Full-Stack Developer</p>
+    <p class="hero-description">
+      I build complete web applications that are both functional and beautiful. 
+      Specializing in Python, Django, JavaScript, and modern web technologies 
+      to create digital experiences that make a difference.
+    </p>
+    
+    <div class="hero-actions">
+      <a href="{% url 'main:projects' %}" class="btn btn-primary">View My Work</a>
+      <a href="{% url 'main:contact' %}" class="btn btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-preview" id="about">
+  <div class="about-content">
+    <h2>What I Do</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Frontend Development</h3>
+        <p>Creating responsive, user-friendly interfaces with HTML, CSS, JavaScript, and modern frameworks.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Backend Development</h3>
+        <p>Building robust server-side applications with Python, Django, and database management.</p>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Full-Stack Solutions</h3>
+        <p>End-to-end development from concept to deployment, ensuring seamless user experiences.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Preview -->
+<section class="skills-preview" id="skills">
+  <h2>Technologies I Work With</h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Frontend</h3>
+      <div class="skills">
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+      </div>
+    </div>
+    
+    <div class="skill-category">
+      <h3>Backend</h3>
+      <div class="skills">
+        <span class="skill">Python</span>
+        <span class="skill">Django</span>
+        <span class="skill">PostgreSQL</span>
+        <span class="skill">APIs</span>
+      </div>
+    </div>
+    
+    <div class="skill-category">
+      <h3>Tools</h3>
+      <div class="skills">
+        <span class="skill">Git</span>
+        <span class="skill">Docker</span>
+        <span class="skill">Heroku</span>
+        <span class="skill">VS Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to Build Something Amazing?</h2>
+    <p>Let's discuss your next project and bring your ideas to life.</p>
+    <a href="{% url 'main:contact' %}" class="btn btn-primary">Start a Conversation</a>
+  </div>
+</section>
+{% endblock %}

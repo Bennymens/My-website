@@ -1,0 +1,336 @@
+{% extends 'base.html' %} {% load static %} {% block title %}My Work - Benedict
+Nii Odartey Mensah{% endblock %} {% block content %}
+<!-- Page Header -->
+<section class="page-header">
+  <div class="header-content">
+    <h1>My Work</h1>
+    <p class="page-subtitle">
+      A showcase of projects I've built and technologies I've worked with. Each
+      project represents a solution to real-world problems.
+    </p>
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="featured-projects" id="featured">
+  <h2>Featured Projects</h2>
+  <div class="projects-grid featured">
+    <!-- Featured Project 1 -->
+    <article class="project-card featured">
+      <div class="project-image">
+        <img
+          src="https://via.placeholder.com/600x400?text=Flight+Booking+System"
+          alt="Flight Booking System screenshot"
+        />
+        <div class="project-overlay">
+          <a href="#" class="btn btn-outline">View Details</a>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-category">Web Application</span>
+          <span class="project-status">Completed</span>
+        </div>
+        <h3>Flight Booking & Comparison System</h3>
+        <p>
+          A comprehensive flight booking platform with search, comparison, and
+          booking features. Built with Python and Django.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="project-link">Live Demo</a>
+          <a href="#" class="project-link">GitHub</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- All Projects -->
+<section class="all-projects" id="projects">
+  <h2>All Projects</h2>
+
+  <!-- Project Filter -->
+  <div class="project-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web Apps</button>
+    <button class="filter-btn" data-filter="api">APIs</button>
+    <button class="filter-btn" data-filter="frontend">Frontend</button>
+    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+  </div>
+
+  <div class="projects-grid">
+    {% for project in projects %}
+    <article class="project-card" data-category="{{ project.category }}">
+      <div class="project-image">
+        {% if project.image %}
+        <img
+          src="{{ project.image.url }}"
+          alt="{{ project.title }} screenshot"
+        />
+        {% else %}
+        <img
+          src="https://via.placeholder.com/400x250?text={{ project.title|urlencode }}"
+          alt="{{ project.title }} screenshot"
+        />
+        {% endif %}
+        <div class="project-overlay">
+          <a
+            href="{% url 'main:project_detail' project.slug %}"
+            class="btn btn-outline"
+            >View Details</a
+          >
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-category">{{ project.category|title }}</span>
+          <span class="project-date">{{ project.created_at|date:"M Y" }}</span>
+        </div>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description|truncatechars:120 }}</p>
+        {% if project.technologies.all %}
+        <div class="project-tech">
+          {% for tech in project.technologies.all|slice:":4" %}
+          <span class="tech-tag">{{ tech.name }}</span>
+          {% endfor %} {% if project.technologies.all.count > 4 %}
+          <span class="tech-tag more"
+            >+{{ project.technologies.all.count|add:"-4" }}</span
+          >
+          {% endif %}
+        </div>
+        {% endif %}
+        <div class="project-links">
+          {% if project.url %}
+          <a
+            href="{{ project.url }}"
+            target="_blank"
+            rel="noopener"
+            class="project-link"
+            >Live Demo</a
+          >
+          {% endif %} {% if project.github_url %}
+          <a
+            href="{{ project.github_url }}"
+            target="_blank"
+            rel="noopener"
+            class="project-link"
+            >GitHub</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% empty %}
+    <!-- Sample Projects when database is empty -->
+    <article class="project-card" data-category="web">
+      <div class="project-image">
+        <img
+          src="https://via.placeholder.com/400x250?text=Architecture+Website"
+          alt="Architecture Company Website"
+        />
+        <div class="project-overlay">
+          <a href="#" class="btn btn-outline">View Details</a>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-category">Web Design</span>
+          <span class="project-date">Sep 2025</span>
+        </div>
+        <h3>Architecture Company Website</h3>
+        <p>
+          Professional website for an architecture firm with portfolio showcase
+          and contact functionality.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Bootstrap</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-category="fullstack">
+      <div class="project-image">
+        <img
+          src="https://via.placeholder.com/400x250?text=Library+Management"
+          alt="Library Management System"
+        />
+        <div class="project-overlay">
+          <a href="#" class="btn btn-outline">View Details</a>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-category">Full Stack</span>
+          <span class="project-date">Aug 2025</span>
+        </div>
+        <h3>Library Management System</h3>
+        <p>
+          Complete system for managing library resources, user accounts, and
+          book lending operations.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Bootstrap</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card" data-category="api">
+      <div class="project-image">
+        <img
+          src="https://via.placeholder.com/400x250?text=Recipe+Generator"
+          alt="Food Recipe Generator"
+        />
+        <div class="project-overlay">
+          <a href="#" class="btn btn-outline">View Details</a>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-meta">
+          <span class="project-category">API</span>
+          <span class="project-date">Jul 2025</span>
+        </div>
+        <h3>AI Recipe Generator</h3>
+        <p>
+          Smart recipe generation system with ingredient-based suggestions and
+          nutritional information.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">OpenAI</span>
+          <span class="tech-tag">React</span>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Current Work -->
+<section class="current-work" id="current">
+  <h2>Currently Working On</h2>
+  <div class="work-in-progress">
+    <div class="wip-card">
+      <div class="wip-status">
+        <span class="status-indicator active"></span>
+        <span class="status-text">In Development</span>
+      </div>
+      <h3>E-Commerce Platform</h3>
+      <p>
+        Building a modern e-commerce solution with advanced features like
+        real-time inventory, payment processing, and admin dashboard.
+      </p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 65%"></div>
+      </div>
+      <span class="progress-text">65% Complete</span>
+    </div>
+
+    <div class="wip-card">
+      <div class="wip-status">
+        <span class="status-indicator planning"></span>
+        <span class="status-text">Planning</span>
+      </div>
+      <h3>Task Management App</h3>
+      <p>
+        Designing a collaborative task management application with team features
+        and project tracking capabilities.
+      </p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 20%"></div>
+      </div>
+      <span class="progress-text">Planning Phase</span>
+    </div>
+  </div>
+</section>
+
+<!-- Skills & Technologies -->
+<section class="technologies" id="tech">
+  <h2>Technologies I Use</h2>
+  <div class="tech-categories">
+    <div class="tech-category">
+      <h3>Frontend</h3>
+      <div class="tech-list">
+        <div class="tech-item">
+          <span class="tech-name">HTML5/CSS3</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 95%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">JavaScript</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">React</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 75%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Backend</h3>
+      <div class="tech-list">
+        <div class="tech-item">
+          <span class="tech-name">Python</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Django</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">PostgreSQL</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 80%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3>Tools & Others</h3>
+      <div class="tech-list">
+        <div class="tech-item">
+          <span class="tech-name">Git/GitHub</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">Docker</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 70%"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <span class="tech-name">AWS</span>
+          <div class="tech-level">
+            <div class="level-bar" style="width: 65%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

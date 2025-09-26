@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact - Benedict Nii Odartey Mensah{% endblock %}
+
+{% block content %}
+<section id="contact" class="contact-section">
+  <div class="contact-header">
+    <h2>Get in Touch</h2>
+    <p>Interested in working together or have a question? Drop me a message!</p>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Contact Info -->
+    <div class="contact-info card">
+      <h3>Contact Details</h3>
+      <p><strong>Email:</strong> <a href="mailto:benymento4@gmail.com">benymento4@gmail.com</a></p>
+      <p><strong>Location:</strong> Accra, Ghana</p>
+      <div class="social-links">
+        <a href="https://github.com/bennymensah" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/benedict-mensah" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form card">
+      <h3>Send a Message</h3>
+      <form method="POST" action="{% url 'main:contact' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="neon-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

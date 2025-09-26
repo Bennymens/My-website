@@ -1,0 +1,453 @@
+{% extends 'base.html' %} {% load static %} {% block title %}{{ project.title }}
+- Benedict Nii Odartey Mensah{% endblock %} {% block meta_description %}{{
+project.description }}{% endblock %} {% block og_title %}{{ project.title }} -
+Benedict Nii Odartey Mensah{% endblock %} {% block og_description %}{{
+project.description }}{% endblock %} {% block content %}
+<div class="project-detail">
+  <!-- Project Header -->
+  <header class="project-header">
+    <div class="breadcrumb">
+      <a href="{% url 'main:home' %}">Home</a>
+      <span>/</span>
+      <a href="{% url 'main:home' %}#projects">Projects</a>
+      <span>/</span>
+      <span>{{ project.title }}</span>
+    </div>
+
+    <h1>{{ project.title }}</h1>
+    <p class="project-subtitle">{{ project.description }}</p>
+
+    <div class="project-meta">
+      {% if project.url %}
+      <a
+        href="{{ project.url }}"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Live Project
+      </a>
+      {% endif %} {% if project.github_url %}
+      <a
+        href="{{ project.github_url }}"
+        class="btn btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Code
+      </a>
+      {% endif %} {% if project.created_at %}
+      <span class="project-date">{{ project.created_at|date:"F Y" }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Project Image -->
+  {% if project.image %}
+  <div class="project-image-container">
+    <img
+      src="{{ project.image.url }}"
+      alt="{{ project.title }} screenshot"
+      class="project-hero-image"
+    />
+  </div>
+  {% endif %}
+
+  <!-- Project Content -->
+  <div class="project-content">
+    <div class="project-main">
+      {% if project.long_description %}
+      <section class="project-description">
+        <h2>About This Project</h2>
+        <div class="content">{{ project.long_description|linebreaks }}</div>
+      </section>
+      {% endif %} {% if project.features %}
+      <section class="project-features">
+        <h2>Key Features</h2>
+        <div class="content">{{ project.features|linebreaks }}</div>
+      </section>
+      {% endif %} {% if project.challenges %}
+      <section class="project-challenges">
+        <h2>Challenges & Solutions</h2>
+        <div class="content">{{ project.challenges|linebreaks }}</div>
+      </section>
+      {% endif %} {% if project.learnings %}
+      <section class="project-learnings">
+        <h2>What I Learned</h2>
+        <div class="content">{{ project.learnings|linebreaks }}</div>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside class="project-sidebar">
+      <!-- Technologies Used -->
+      {% if project.technologies.all %}
+      <div class="sidebar-section">
+        <h3>Technologies Used</h3>
+        <div class="tech-list">
+          {% for tech in project.technologies.all %}
+          <span class="tech-tag">{{ tech.name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Project Details -->
+      <div class="sidebar-section">
+        <h3>Project Details</h3>
+        <dl class="project-details">
+          {% if project.category %}
+          <dt>Category</dt>
+          <dd>{{ project.category }}</dd>
+          {% endif %} {% if project.status %}
+          <dt>Status</dt>
+          <dd>{{ project.get_status_display }}</dd>
+          {% endif %} {% if project.created_at %}
+          <dt>Date</dt>
+          <dd>{{ project.created_at|date:"F Y" }}</dd>
+          {% endif %} {% if project.duration %}
+          <dt>Duration</dt>
+          <dd>{{ project.duration }}</dd>
+          {% endif %} {% if project.team_size %}
+          <dt>Team Size</dt>
+          <dd>
+            {{ project.team_size }} person{{ project.team_size|pluralize }}
+          </dd>
+          {% endif %}
+        </dl>
+      </div>
+
+      <!-- Links -->
+      <div class="sidebar-section">
+        <h3>Links</h3>
+        <div class="project-links">
+          {% if project.url %}
+          <a
+            href="{{ project.url }}"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>🌐</span> Live Demo
+          </a>
+          {% endif %} {% if project.github_url %}
+          <a
+            href="{{ project.github_url }}"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>📁</span> Source Code
+          </a>
+          {% endif %} {% if project.documentation_url %}
+          <a
+            href="{{ project.documentation_url }}"
+            class="project-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>📚</span> Documentation
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Projects -->
+  {% if related_projects %}
+  <section class="related-projects">
+    <h2>Related Projects</h2>
+    <div class="projects-grid">
+      {% for related in related_projects %}
+      <article class="project card">
+        {% if related.image %}
+        <img
+          src="{{ related.image.url }}"
+          alt="{{ related.title }} screenshot"
+          class="project-image"
+        />
+        {% else %}
+        <div class="project-placeholder">
+          <span>{{ related.title|truncatechars:2 }}</span>
+        </div>
+        {% endif %}
+
+        <div class="project-content">
+          <h3>
+            <a href="{% url 'main:project_detail' related.slug %}"
+              >{{ related.title }}</a
+            >
+          </h3>
+          <p>{{ related.description|truncatechars:100 }}</p>
+
+          {% if related.technologies.all %}
+          <div class="project-tech">
+            {% for tech in related.technologies.all|slice:":3" %}
+            <span class="tech-tag">{{ tech.name }}</span>
+            {% endfor %} {% if related.technologies.all.count > 3 %}
+            <span class="tech-tag"
+              >+{{ related.technologies.all.count|add:"-3" }}</span
+            >
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Navigation -->
+  <nav class="project-navigation">
+    <a href="{% url 'main:home' %}#projects" class="btn btn-secondary">
+      ← Back to Projects
+    </a>
+  </nav>
+</div>
+{% endblock %} {% block extra_css %}
+<style>
+  .project-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .project-header {
+    margin-bottom: 40px;
+  }
+
+  .breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb span {
+    margin: 0 8px;
+  }
+
+  .project-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+  }
+
+  .project-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .project-date {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .project-image-container {
+    margin-bottom: 50px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .project-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 50px;
+    margin-bottom: 60px;
+  }
+
+  .project-main section {
+    margin-bottom: 40px;
+  }
+
+  .project-main h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+  }
+
+  .project-main .content {
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .project-sidebar {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 30px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .sidebar-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidebar-section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+  }
+
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tech-tag {
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .project-details {
+    margin: 0;
+  }
+
+  .project-details dt {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+  }
+
+  .project-details dd {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    margin-left: 0;
+  }
+
+  .project-details dd:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.2s;
+  }
+
+  .project-link:hover {
+    background: var(--border);
+  }
+
+  .project-link span {
+    font-size: 1.2rem;
+  }
+
+  .related-projects {
+    margin-bottom: 50px;
+  }
+
+  .related-projects h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: 8px;
+  }
+
+  .project-navigation {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .project-detail {
+      padding: 30px 15px;
+    }
+
+    .project-header h1 {
+      font-size: 2rem;
+    }
+
+    .project-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .project-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .project-sidebar {
+      position: static;
+      padding: 25px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %}

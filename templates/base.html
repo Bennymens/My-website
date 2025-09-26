@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{% block meta_description %}Benedict Nii Odartey Mensah (Benny) - Full-Stack Developer & Digital Creator. Explore my futuristic portfolio of projects and get in touch.{% endblock %}"
+    />
+    <title>{% block title %}Benny | Full-Stack Developer{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body class="dark-theme">
+    <div class="wrap">
+      <!-- Header -->
+      <header class="site-header">
+        <div class="brand">Benny.dev</div>
+        <button
+          class="mobile-menu-toggle"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav aria-label="Main navigation" class="nav-menu">
+          <a href="{% url 'main:home' %}">Home</a>
+          <a href="{% url 'main:work' %}">Work</a>
+          <a href="{% url 'main:contact' %}">Contact</a>
+        </nav>
+      </header>
+
+      <!-- Page Content -->
+      <main>{% block content %}{% endblock %}</main>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <p>
+          © <span id="current-year">2025</span> Benedict Nii Odartey Mensah •
+          Built with ⚡ Futurism
+        </p>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %} {% endif %}
+  </body>
+</html>
