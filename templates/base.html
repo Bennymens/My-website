@@ -8,46 +8,107 @@
       name="description"
       content="{% block meta_description %}Benedict Nii Odartey Mensah (Benny) - Full-Stack Developer & Digital Creator. Explore my futuristic portfolio of projects and get in touch.{% endblock %}"
     />
-    <title>{% block title %}Benny | Full-Stack Developer{% endblock %}</title>
+    <title>{% block title %}Benedict | Portfolio{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Heroicons (for social logos) -->
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
-  <body class="dark-theme">
-    <div class="wrap">
-      <!-- Header -->
-      <header class="site-header">
-        <div class="brand">Benny.dev</div>
-        <button
-          class="mobile-menu-toggle"
-          aria-label="Toggle mobile menu"
-          aria-expanded="false"
+  <body
+    class="bg-gradient-to-br from-black via-gray-900 to-black text-white min-h-screen flex flex-col font-sans"
+  >
+    <!-- Navbar -->
+    <header
+      class="flex justify-between items-center px-8 py-6 bg-black/40 backdrop-blur-md sticky top-0 z-50"
+    >
+      <h1 class="text-2xl font-bold tracking-widest text-cyan-400">
+        <a href="{% url 'main:home' %}">BENEDICT</a>
+      </h1>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6 text-gray-300">
+        <a href="{% url 'main:home' %}" class="hover:text-cyan-400 transition"
+          >Home</a
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav aria-label="Main navigation" class="nav-menu">
-          <a href="{% url 'main:home' %}">Home</a>
-          <a href="{% url 'main:work' %}">Work</a>
-          <a href="{% url 'main:contact' %}">Contact</a>
-        </nav>
-      </header>
+        <a href="{% url 'main:work' %}" class="hover:text-cyan-400 transition"
+          >Projects</a
+        >
+        <a
+          href="{% url 'main:contact' %}"
+          class="hover:text-cyan-400 transition"
+          >Contact</a
+        >
+      </nav>
 
-      <!-- Page Content -->
-      <main>{% block content %}{% endblock %}</main>
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="md:hidden mobile-menu-toggle text-cyan-400"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="hamburger-line bg-cyan-400"></span>
+        <span class="hamburger-line bg-cyan-400"></span>
+        <span class="hamburger-line bg-cyan-400"></span>
+      </button>
 
-      <!-- Mobile Navigation Overlay -->
+      <!-- Mobile Navigation Menu -->
+      <nav class="nav-menu md:hidden bg-black/90 backdrop-blur-md">
+        <a
+          href="{% url 'main:home' %}"
+          class="text-gray-300 hover:text-cyan-400 transition"
+          >Home</a
+        >
+        <a
+          href="{% url 'main:work' %}"
+          class="text-gray-300 hover:text-cyan-400 transition"
+          >Projects</a
+        >
+        <a
+          href="{% url 'main:contact' %}"
+          class="text-gray-300 hover:text-cyan-400 transition"
+          >Contact</a
+        >
+      </nav>
+
+      <!-- Mobile Menu Overlay -->
       <div class="nav-overlay"></div>
+    </header>
 
-      <!-- Footer -->
-      <footer class="site-footer">
-        <p>
-          © <span id="current-year">2025</span> Benedict Nii Odartey Mensah •
-          Built with ⚡ Futurism
-        </p>
-      </footer>
-    </div>
+    <main class="flex-grow">{% block content %} {% endblock %}</main>
 
-    <!-- Scripts -->
+    <!-- Footer with Socials -->
+    <footer class="py-8 bg-black/80 text-center">
+      <p class="text-gray-400 mb-4">Connect with me</p>
+      <div class="flex justify-center space-x-6 text-cyan-400">
+        <a
+          href="https://github.com/Bennymens"
+          target="_blank"
+          class="hover:text-cyan-300"
+        >
+          <i data-feather="github"></i>
+        </a>
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          class="hover:text-cyan-300"
+        >
+          <i data-feather="linkedin"></i>
+        </a>
+        <a
+          href="https://twitter.com/yourusername"
+          target="_blank"
+          class="hover:text-cyan-300"
+        >
+          <i data-feather="twitter"></i>
+        </a>
+      </div>
+      <p class="text-gray-500 text-sm mt-4">
+        © 2025 Benedict. All rights reserved.
+      </p>
+    </footer>
+
+    <script>
+      feather.replace();
+    </script>
     <script src="{% static 'js/script.js' %}"></script>
 
     {% if messages %} {% for message in messages %}

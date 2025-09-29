@@ -1,95 +1,108 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Benedict Nii Odartey Mensah — Full-Stack Developer{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Benedict |
+Full-Stack Developer{% endblock %} {% block content %}
 <!-- Hero Section -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <h1>Benedict Nii Odartey Mensah</h1>
-    <p class="hero-subtitle">Full-Stack Developer</p>
-    <p class="hero-description">
-      I build complete web applications that are both functional and beautiful. 
-      Specializing in Python, Django, JavaScript, and modern web technologies 
-      to create digital experiences that make a difference.
-    </p>
-    
-    <div class="hero-actions">
-      <a href="{% url 'main:projects' %}" class="btn btn-primary">View My Work</a>
-      <a href="{% url 'main:contact' %}" class="btn btn-secondary">Get In Touch</a>
+<section
+  class="flex flex-col items-center justify-center text-center flex-grow px-6 py-20"
+>
+  <h2 class="text-5xl md:text-7xl font-extrabold text-cyan-400 animate-pulse">
+    Hi, I'm Benedict 🚀
+  </h2>
+  <p class="mt-4 text-lg text-gray-300 max-w-2xl">
+    I'm a
+    <span class="text-cyan-300">Python Developer & Backend Engineer</span>
+    passionate about building futuristic apps, websites, and solutions that
+    bridge <span class="text-cyan-300">technology</span> and
+    <span class="text-cyan-300">education</span>.
+  </p>
+  <div class="mt-8 flex space-x-4">
+    <a
+      href="{% url 'main:work' %}"
+      class="px-6 py-3 bg-cyan-500 text-black font-semibold rounded-full hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/40"
+    >
+      View Projects
+    </a>
+    <a
+      href="#skills"
+      class="px-6 py-3 border border-cyan-400 text-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"
+    >
+      My Skills
+    </a>
+  </div>
+</section>
+
+<!-- Projects Preview Section -->
+<section id="projects" class="py-20 px-6 bg-black/40 backdrop-blur-md">
+  <h3 class="text-3xl font-bold text-center text-cyan-400 mb-12">
+    Featured Projects
+  </h3>
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <!-- Project Card 1 -->
+    <div
+      class="p-6 bg-gray-800/50 rounded-2xl shadow-lg hover:shadow-cyan-400/40 transition"
+    >
+      <h4 class="text-xl font-semibold text-cyan-300 mb-2">
+        📚 School Management App
+      </h4>
+      <p class="text-gray-300 text-sm">
+        A Django-based platform for teachers and students: registration, grades,
+        and learning material sharing.
+      </p>
+    </div>
+    <!-- Project Card 2 -->
+    <div
+      class="p-6 bg-gray-800/50 rounded-2xl shadow-lg hover:shadow-cyan-400/40 transition"
+    >
+      <h4 class="text-xl font-semibold text-cyan-300 mb-2">
+        🛒 E-Commerce Website
+      </h4>
+      <p class="text-gray-300 text-sm">
+        A full-featured Django e-commerce app with user authentication, product
+        listings, and checkout system.
+      </p>
+    </div>
+    <!-- Project Card 3 -->
+    <div
+      class="p-6 bg-gray-800/50 rounded-2xl shadow-lg hover:shadow-cyan-400/40 transition"
+    >
+      <h4 class="text-xl font-semibold text-cyan-300 mb-2">
+        🤖 AI Assistant Website
+      </h4>
+      <p class="text-gray-300 text-sm">
+        A futuristic personal assistant website designed with a high-tech UI and
+        AI-powered interactions.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- About Section -->
-<section class="about-preview" id="about">
-  <div class="about-content">
-    <h2>What I Do</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🎨</div>
-        <h3>Frontend Development</h3>
-        <p>Creating responsive, user-friendly interfaces with HTML, CSS, JavaScript, and modern frameworks.</p>
-      </div>
-      
-      <div class="service-card">
-        <div class="service-icon">⚙️</div>
-        <h3>Backend Development</h3>
-        <p>Building robust server-side applications with Python, Django, and database management.</p>
-      </div>
-      
-      <div class="service-card">
-        <div class="service-icon">🚀</div>
-        <h3>Full-Stack Solutions</h3>
-        <p>End-to-end development from concept to deployment, ensuring seamless user experiences.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Skills Preview -->
-<section class="skills-preview" id="skills">
-  <h2>Technologies I Work With</h2>
-  <div class="skills-grid">
-    <div class="skill-category">
-      <h3>Frontend</h3>
-      <div class="skills">
-        <span class="skill">HTML5</span>
-        <span class="skill">CSS3</span>
-        <span class="skill">JavaScript</span>
-        <span class="skill">React</span>
-      </div>
-    </div>
-    
-    <div class="skill-category">
-      <h3>Backend</h3>
-      <div class="skills">
-        <span class="skill">Python</span>
-        <span class="skill">Django</span>
-        <span class="skill">PostgreSQL</span>
-        <span class="skill">APIs</span>
-      </div>
-    </div>
-    
-    <div class="skill-category">
-      <h3>Tools</h3>
-      <div class="skills">
-        <span class="skill">Git</span>
-        <span class="skill">Docker</span>
-        <span class="skill">Heroku</span>
-        <span class="skill">VS Code</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Call to Action -->
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>Ready to Build Something Amazing?</h2>
-    <p>Let's discuss your next project and bring your ideas to life.</p>
-    <a href="{% url 'main:contact' %}" class="btn btn-primary">Start a Conversation</a>
+<!-- Skills Section -->
+<section id="skills" class="py-20 px-6 max-w-5xl mx-auto text-center">
+  <h3 class="text-3xl font-bold text-cyan-400 mb-12">Skills</h3>
+  <div class="flex flex-wrap justify-center gap-6 text-gray-300">
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >Python</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >Django</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >JavaScript</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >HTML/CSS</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >GitHub</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >Figma</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >SQLite</span
+    >
+    <span class="px-4 py-2 bg-gray-800/50 rounded-full border border-cyan-400"
+      >Bootstrap</span
+    >
   </div>
 </section>
 {% endblock %}
