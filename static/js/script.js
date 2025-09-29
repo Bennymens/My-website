@@ -303,36 +303,66 @@ function initializeNavigationHighlight() {
 
 // Mobile Menu Functionality
 function initializeMobileMenu() {
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
+  const hamburger = document.querySelector(".mobile-menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+  const overlay = document.querySelector(".nav-overlay");
+  const navLinks = document.querySelectorAll(".nav-menu a");
 
-  if (hamburger && navLinks) {
+  if (hamburger && navMenu && overlay) {
+    // Toggle menu when hamburger is clicked
     hamburger.addEventListener("click", toggleMobileMenu);
 
-    // Close menu when clicking outside
-    document.addEventListener("click", function (e) {
-      const isClickInsideNav = navLinks.contains(e.target);
-      const isClickOnHamburger = hamburger.contains(e.target);
+    // Close menu when overlay is clicked
+    overlay.addEventListener("click", toggleMobileMenu);
 
-      if (
-        !isClickInsideNav &&
-        !isClickOnHamburger &&
-        navLinks.classList.contains("active")
-      ) {
-        toggleMobileMenu();
+    // Close menu when a nav link is clicked
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    // Close menu on window resize if open
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 768 && navMenu.classList.contains("active")) {
+        closeMobileMenu();
       }
     });
   }
 }
 
 function toggleMobileMenu() {
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".nav-links");
+  const hamburger = document.querySelector(".mobile-menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+  const overlay = document.querySelector(".nav-overlay");
 
-  if (hamburger && navLinks) {
+  if (hamburger && navMenu && overlay) {
+    const isActive = navMenu.classList.contains("active");
+
     hamburger.classList.toggle("active");
-    navLinks.classList.toggle("active");
-    document.body.classList.toggle("menu-open");
+    navMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    // Prevent body scroll when menu is open
+    if (!isActive) {
+      document.body.style.overflow = "hidden";
+      hamburger.setAttribute("aria-expanded", "true");
+    } else {
+      document.body.style.overflow = "";
+      hamburger.setAttribute("aria-expanded", "false");
+    }
+  }
+}
+
+function closeMobileMenu() {
+  const hamburger = document.querySelector(".mobile-menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
+  const overlay = document.querySelector(".nav-overlay");
+
+  if (hamburger && navMenu && overlay) {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+    hamburger.setAttribute("aria-expanded", "false");
   }
 }
 
