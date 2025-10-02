@@ -71,6 +71,8 @@ header {
   font-size: var(--text-lg);
   background: linear-gradient(90deg, var(--accent), var(--accent-glow));
   -webkit-background-clip: text;
+  background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.025em;
   z-index: 1001;
@@ -145,13 +147,13 @@ nav a.active {
   margin-bottom: 60px;
   text-align: center;
 }
-
 .hero h1 {
   font-size: var(--text-3xl);
   line-height: 1.2;
   font-weight: 700;
   background: linear-gradient(90deg, var(--accent), var(--accent-glow));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: fadeIn 1.5s ease;
 }
